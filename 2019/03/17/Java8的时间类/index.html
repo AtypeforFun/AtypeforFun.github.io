@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://atypeforfun.github.io">
   <title>Java8的时间类 | 精神时光屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="首先看官方文档怎么说 关于时间的api在java.base模块下（moduls）的java.time包里。  Package java.timeThe main API for dates, times, instants, and durations. 主要针对dates(日期),times(时间),instants(瞬时),durations(间隔)的api。">
+  <meta name="description" content="首先看官方文档怎么说 关于时间的API在java.base模块下（modules）的java.time包里。  Package java.timeThe main API for dates, times, instants, and durations. 主要针对dates(日期),times(时间),instants(瞬时),durations(间隔)的api。">
 <meta name="keywords" content="JDK8,API">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java8的时间类">
 <meta property="og:url" content="https://atypeforfun.github.io/2019/03/17/Java8的时间类/index.html">
 <meta property="og:site_name" content="精神时光屋">
-<meta property="og:description" content="首先看官方文档怎么说 关于时间的api在java.base模块下（moduls）的java.time包里。  Package java.timeThe main API for dates, times, instants, and durations. 主要针对dates(日期),times(时间),instants(瞬时),durations(间隔)的api。">
+<meta property="og:description" content="首先看官方文档怎么说 关于时间的API在java.base模块下（modules）的java.time包里。  Package java.timeThe main API for dates, times, instants, and durations. 主要针对dates(日期),times(时间),instants(瞬时),durations(间隔)的api。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-25T10:53:35.911Z">
+<meta property="og:updated_time" content="2019-05-25T10:59:45.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java8的时间类">
-<meta name="twitter:description" content="首先看官方文档怎么说 关于时间的api在java.base模块下（moduls）的java.time包里。  Package java.timeThe main API for dates, times, instants, and durations. 主要针对dates(日期),times(时间),instants(瞬时),durations(间隔)的api。">
+<meta name="twitter:description" content="首先看官方文档怎么说 关于时间的API在java.base模块下（modules）的java.time包里。  Package java.timeThe main API for dates, times, instants, and durations. 主要针对dates(日期),times(时间),instants(瞬时),durations(间隔)的api。">
   
     <link rel="alternative" href="/atom.xml" title="精神时光屋" type="application/atom+xml">
   
@@ -166,7 +166,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="首先看官方文档怎么说"><a href="#首先看官方文档怎么说" class="headerlink" title="首先看官方文档怎么说"></a>首先看官方文档怎么说</h3><p> 关于时间的api在java.base模块下（moduls）的java.time包里。</p>
+        <h3 id="首先看官方文档怎么说"><a href="#首先看官方文档怎么说" class="headerlink" title="首先看官方文档怎么说"></a>首先看官方文档怎么说</h3><p> 关于时间的API在java.base模块下（modules）的java.time包里。</p>
 <hr>
 <p>Package java.time<br>The main API for dates, times, instants, and durations.</p>
 <p>主要针对dates(日期),times(时间),instants(瞬时),durations(间隔)的api。</p>
@@ -174,9 +174,9 @@
 <p>The classes defined here represent the principle date-time concepts, including instants, durations, dates, times, time-zones and periods. They are based on the ISO calendar system, which is the de facto world calendar following the proleptic Gregorian rules. All the classes are immutable and thread-safe.</p>
 <p>这里的类表现了date-time概念的原则，其中包括dates(日期),times(时间),instants(瞬时),durations(间隔),time—zone(时区),periods(周期)。并且都基于iso国际时间标准，所有的类都是不可变的、线程安全的。</p>
 <p>Each date time instance is composed of fields that are conveniently made available by the APIs. For lower level access to the fields refer to the java.time.temporal package. Each class includes support for printing and parsing all manner of dates and times. Refer to the java.time.format package for customization options.</p>
-<p>每一个date time的实列都由一些能够通过apis非常方便访问的域(field)构成，对于这些域更第一级别的入口定义在包java.time.temporal里面。每一个类都之称各种格式的dates和times，在<br> java.time.format包中定义了供使用者自由组织的选项。</p>
+<p>每一个date time的实列都由一些能够通过APIs非常方便访问的域(field)构成，对于这些域更第一级别的入口定义在包java.time.temporal里面。每一个类都之称各种格式的dates和times，在<br> java.time.format包中定义了供使用者自由组织的选项。</p>
 <p>The java.time.chrono package contains the calendar neutral API ChronoLocalDate, ChronoLocalDateTime, ChronoZonedDateTime and Era. This is intended for use by applications that need to use localized calendars. It is recommended that applications use the ISO-8601 date and time classes from this package across system boundaries, such as to the database or across the network. The calendar neutral API should be reserved for interactions with users.</p>
-<p>java.time.chrono 定义了一些中性的api，这些api都是应用将要通过本地的日历使用的，它在应用跨系统范围外例如连接网络，访问数据库时，推荐使用本包中的ISO-8601的date和time类，中性化的api应该留给用户</p>
+<p>java.time.chrono 定义了一些中性的API，这些API都是应用将要通过本地的日历使用的，它在应用跨系统范围外例如连接网络，访问数据库时，推荐使用本包中的ISO-8601的date和time类，中性化的api应该留给用户</p>
 <p>Dates and Times<br>Instant is essentially a numeric timestamp. The current Instant can be retrieved from a Clock. This is useful for logging and persistence of a point in time and has in the past been associated with storing the result from System.currentTimeMillis().</p>
 <p>Dates和Times的Instant本质上都是数字化的时间戳，当前的实列可以从Clock对象中获取。这对记录和持久化一个时间点非常有用并且与存储 System.currentTimeMillis() 的结果相关联。</p>
 <p>LocalDate stores a date without a time. This stores a date like ‘2010-12-03’ and could be used to store a birthday.</p>
