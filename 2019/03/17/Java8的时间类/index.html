@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://atypeforfun.github.io">
-  <title>java8的时间类 | 精神时光屋</title>
+  <title>Java8的时间类 | 精神时光屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="首先看官方文档怎么说 关于时间的api在java.base模块下（moduls）的java.time包里。  Package java.timeThe main API for dates, times, instants, and durations. 主要针对dates(日期),times(时间),instants(瞬时),durations(间隔)的api。">
 <meta name="keywords" content="JDK8,API">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java8的时间类">
-<meta property="og:url" content="https://atypeforfun.github.io/2019/03/17/java8的时间类/index.html">
+<meta property="og:title" content="Java8的时间类">
+<meta property="og:url" content="https://atypeforfun.github.io/2019/03/17/Java8的时间类/index.html">
 <meta property="og:site_name" content="精神时光屋">
 <meta property="og:description" content="首先看官方文档怎么说 关于时间的api在java.base模块下（moduls）的java.time包里。  Package java.timeThe main API for dates, times, instants, and durations. 主要针对dates(日期),times(时间),instants(瞬时),durations(间隔)的api。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-25T10:42:00.590Z">
+<meta property="og:updated_time" content="2019-05-25T10:53:35.911Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java8的时间类">
+<meta name="twitter:title" content="Java8的时间类">
 <meta name="twitter:description" content="首先看官方文档怎么说 关于时间的api在java.base模块下（moduls）的java.time包里。  Package java.timeThe main API for dates, times, instants, and durations. 主要针对dates(日期),times(时间),instants(瞬时),durations(间隔)的api。">
   
     <link rel="alternative" href="/atom.xml" title="精神时光屋" type="application/atom+xml">
@@ -146,19 +146,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-java8的时间类" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java8的时间类" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      java8的时间类
+      Java8的时间类
     </h1>
   
 
         
-        <a href="/2019/03/17/java8的时间类/" class="archive-article-date">
+        <a href="/2019/03/17/Java8的时间类/" class="archive-article-date">
   	<time datetime="2019-03-17T11:28:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-17</time>
 </a>
         
@@ -166,7 +166,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="首先看官方文档怎么说"><a href="#首先看官方文档怎么说" class="headerlink" title="首先看官方文档怎么说"></a>首先看官方文档怎么说</h1><p> 关于时间的api在java.base模块下（moduls）的java.time包里。</p>
+        <h3 id="首先看官方文档怎么说"><a href="#首先看官方文档怎么说" class="headerlink" title="首先看官方文档怎么说"></a>首先看官方文档怎么说</h3><p> 关于时间的api在java.base模块下（moduls）的java.time包里。</p>
 <hr>
 <p>Package java.time<br>The main API for dates, times, instants, and durations.</p>
 <p>主要针对dates(日期),times(时间),instants(瞬时),durations(间隔)的api。</p>
@@ -259,8 +259,8 @@
 <p>The API is also designed for user extensibility, as there are many ways of calculating time. The field and unit API, accessed via TemporalAccessor and Temporal provide considerable flexibility to applications. In addition, the TemporalQuery and TemporalAdjuster interfaces provide day-to-day power, allowing code to read close to business requirements:</p>
 <p>API也为用户的扩展进行了设计，例如有许多方式进行时间的计算，考虑到应用的弹性TemporalAccessor and Temporal 提供了获取域和unit api的入口，TemporalQuery and TemporalAdjuster提供了天为单位的计算方式。</p>
 <p>   LocalDate customerBirthday = customer.loadBirthdayFromDatabase();<br>   LocalDate today = LocalDate.now();<br>   if (customerBirthday.equals(today)) {<br>     LocalDate specialOfferExpiryDate = today.plusWeeks(2).with(next(FRIDAY));<br>     customer.sendBirthdaySpecialOffer(specialOfferExpiryDate);<br>   }</p>
-<h1 id="测试用例试一下"><a href="#测试用例试一下" class="headerlink" title="测试用例试一下"></a>测试用例试一下</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">    public void test() throws InterruptedException &#123;</span><br><span class="line">        //A clock providing access to the current instant, date and time using a time-zone.</span><br><span class="line">        //提供了对某一时区，当前的瞬时，日期，时间的入口</span><br><span class="line">        Clock clock = Clock.systemDefaultZone();</span><br><span class="line">        int i =0;</span><br><span class="line">        Instant instant = clock.instant();</span><br><span class="line">        /*while (i++&lt;60)&#123;</span><br><span class="line">            System.out.println( clock.instant());</span><br><span class="line">            Thread.sleep(10);</span><br><span class="line">        &#125;*/</span><br><span class="line">        //temporal 是时间间隔类们的父类。</span><br><span class="line">        //Duration 获取一段时间的间隔</span><br><span class="line">        System.out.println(Duration.between(instant,clock.instant()));</span><br><span class="line"></span><br><span class="line">        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * it is a description of the date, as used for birthdays, combined with</span><br><span class="line">         *  * the local time as seen on a wall clock.</span><br><span class="line">         *</span><br><span class="line">         *  不带时区，跟随当地时间</span><br><span class="line">         *</span><br><span class="line">         * */</span><br><span class="line">        LocalDateTime localDateTime = LocalDateTime.of(2019, 12, 22, 12, 52);</span><br><span class="line">        //String format = localDateTime.format(dateTimeFormatter);</span><br><span class="line">        //System.out.println(format);</span><br><span class="line">        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of(&quot;Asia/Shanghai&quot;));</span><br><span class="line">        //ZonedDateTime zonedDateTime1 = localDateTime.atZone(ZoneId.of(&quot;America/Phoenix&quot;));</span><br><span class="line">        //System.out.println(zonedDateTime);</span><br><span class="line">        System.out.println(zonedDateTime);</span><br><span class="line">        ZonedDateTime zonedDateTime2 = zonedDateTime.withZoneSameInstant(ZoneId.of(&quot;America/Phoenix&quot;));</span><br><span class="line">        System.out.println(zonedDateTime2);</span><br><span class="line">        System.out.println(zonedDateTime2.format(dateTimeFormatter));</span><br><span class="line">        System.out.println(zonedDateTime.format(dateTimeFormatter));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h1 id="note"><a href="#note" class="headerlink" title="note"></a>note</h1><ol>
+<h3 id="测试用例试一下"><a href="#测试用例试一下" class="headerlink" title="测试用例试一下"></a>测试用例试一下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">    public void test() throws InterruptedException &#123;</span><br><span class="line">        //A clock providing access to the current instant, date and time using a time-zone.</span><br><span class="line">        //提供了对某一时区，当前的瞬时，日期，时间的入口</span><br><span class="line">        Clock clock = Clock.systemDefaultZone();</span><br><span class="line">        int i =0;</span><br><span class="line">        Instant instant = clock.instant();</span><br><span class="line">        /*while (i++&lt;60)&#123;</span><br><span class="line">            System.out.println( clock.instant());</span><br><span class="line">            Thread.sleep(10);</span><br><span class="line">        &#125;*/</span><br><span class="line">        //temporal 是时间间隔类们的父类。</span><br><span class="line">        //Duration 获取一段时间的间隔</span><br><span class="line">        System.out.println(Duration.between(instant,clock.instant()));</span><br><span class="line"></span><br><span class="line">        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * it is a description of the date, as used for birthdays, combined with</span><br><span class="line">         *  * the local time as seen on a wall clock.</span><br><span class="line">         *</span><br><span class="line">         *  不带时区，跟随当地时间</span><br><span class="line">         *</span><br><span class="line">         * */</span><br><span class="line">        LocalDateTime localDateTime = LocalDateTime.of(2019, 12, 22, 12, 52);</span><br><span class="line">        //String format = localDateTime.format(dateTimeFormatter);</span><br><span class="line">        //System.out.println(format);</span><br><span class="line">        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of(&quot;Asia/Shanghai&quot;));</span><br><span class="line">        //ZonedDateTime zonedDateTime1 = localDateTime.atZone(ZoneId.of(&quot;America/Phoenix&quot;));</span><br><span class="line">        //System.out.println(zonedDateTime);</span><br><span class="line">        System.out.println(zonedDateTime);</span><br><span class="line">        ZonedDateTime zonedDateTime2 = zonedDateTime.withZoneSameInstant(ZoneId.of(&quot;America/Phoenix&quot;));</span><br><span class="line">        System.out.println(zonedDateTime2);</span><br><span class="line">        System.out.println(zonedDateTime2.format(dateTimeFormatter));</span><br><span class="line">        System.out.println(zonedDateTime.format(dateTimeFormatter));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="note"><a href="#note" class="headerlink" title="note"></a>note</h3><ol>
 <li>官方文档对设计的基本概念进行了阐述 <ul>
 <li>遵循iso</li>
 <li>面向对象</li>
@@ -364,7 +364,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://atypeforfun.github.io/2019/03/17/java8的时间类/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://atypeforfun.github.io/2019/03/17/Java8的时间类/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -378,11 +378,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/05/25/joda-time和jdk1.7的Date相互转换绕弯记录/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/05/25/Joda-Time转化Jdk的Date绕弯记录/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          joda-time和jdk1.7的Date相互转换绕弯记录
+          Joda-Time转化Jdk的Date绕弯记录
         
       </div>
     </a>
