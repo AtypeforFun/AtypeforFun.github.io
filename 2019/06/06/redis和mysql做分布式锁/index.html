@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://atypeforfun.github.io">
-  <title>Archives: 2019 | 精神时光屋</title>
+  <title>redis和mysql做分布式锁 | 精神时光屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="精神时光屋">
-<meta property="og:url" content="https://atypeforfun.github.io/archives/2019/index.html">
+  <meta name="description" content="Mysql做分布式锁使用乐观锁做分布式锁；一条sql记录就是一个锁 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950//获取当前业务的锁（记录） Lock myLock = LockService.getById(LockType.lOCK_MY.getValue(">
+<meta name="keywords" content="工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis和mysql做分布式锁">
+<meta property="og:url" content="https://atypeforfun.github.io/2019/06/06/redis和mysql做分布式锁/index.html">
 <meta property="og:site_name" content="精神时光屋">
+<meta property="og:description" content="Mysql做分布式锁使用乐观锁做分布式锁；一条sql记录就是一个锁 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950//获取当前业务的锁（记录） Lock myLock = LockService.getById(LockType.lOCK_MY.getValue(">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-06T13:52:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="精神时光屋">
+<meta name="twitter:title" content="redis和mysql做分布式锁">
+<meta name="twitter:description" content="Mysql做分布式锁使用乐观锁做分布式锁；一条sql记录就是一个锁 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950//获取当前业务的锁（记录） Lock myLock = LockService.getById(LockType.lOCK_MY.getValue(">
   
     <link rel="alternative" href="/atom.xml" title="精神时光屋" type="application/atom+xml">
   
@@ -141,36 +146,55 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-redis和mysql做分布式锁" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/06/redis和mysql做分布式锁/" class="archive-article-date">
-  	<time datetime="2019-06-06T21:43:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/06/redis和mysql做分布式锁/">redis和mysql做分布式锁</a>
+    <h1 class="article-title" itemprop="name">
+      redis和mysql做分布式锁
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/06/06/redis和mysql做分布式锁/" class="archive-article-date">
+  	<time datetime="2019-06-06T21:43:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Mysql做分布式锁"><a href="#Mysql做分布式锁" class="headerlink" title="Mysql做分布式锁"></a>Mysql做分布式锁</h3><p>使用乐观锁做分布式锁；<br>一条sql记录就是一个锁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">//获取当前业务的锁（记录）</span><br><span class="line"> Lock myLock = LockService.getById(LockType.lOCK_MY.getValue());</span><br><span class="line">           Boolean validateVersion = validateVersion(myLock);</span><br><span class="line">           if(!validateVersion)&#123;</span><br><span class="line">               log.info(&quot;&quot;);</span><br><span class="line">               return;</span><br><span class="line">           &#125;</span><br><span class="line">           </span><br><span class="line">           /**</span><br><span class="line">           * 业务逻辑</span><br><span class="line">           */</span><br><span class="line">           </span><br><span class="line">           //业务执行成功则释放锁</span><br><span class="line">           myLock.setLocked(LockedStatus.NO);</span><br><span class="line">           myLock.setRevision(null);</span><br><span class="line">           myLock.updateSelective(myLock);</span><br><span class="line"></span><br><span class="line">   private Boolean validateVersion(Lock myLock ) &#123;</span><br><span class="line">       Date now =new Date();</span><br><span class="line">       //解决因为业务而产生的死锁</span><br><span class="line">       //锁定超过12小时 认为没有锁定</span><br><span class="line">       if(myLock.getLocked() == LockedStatus.YES &amp;&amp; (now.getTime()-myLock.getUpdateTime().getTime())&lt;(1000*60*60*12))&#123;</span><br><span class="line">           log.error(&quot;&quot;);</span><br><span class="line">           return false;</span><br><span class="line">       &#125;</span><br><span class="line">       int updateCount = LockService.updateLockVersionBy(myLock.getRevision(), myLock.getId());</span><br><span class="line">       if(updateCount!=1)&#123;</span><br><span class="line">           log.info(&quot;&quot;);</span><br><span class="line">           return false;</span><br><span class="line">       &#125;</span><br><span class="line">       return true;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">       //  更据当前获取的没锁的版本和指定锁记录的id区更新记录的版本</span><br><span class="line">       //  如果更新失败则说明有别的线程进行了更新即锁被别的线程获取</span><br><span class="line">       //  如果更新成功则说明没有别的线程操作这条记录，则获取了锁</span><br><span class="line">       //  锁是否被获取通过一个字段进行标记</span><br><span class="line">       //  版本字段用于控制锁的竞争，和锁字段共同维护这个分布式锁</span><br><span class="line">       //  单纯使用版本，每次获取记录都无法分辨上次更新版本的记录是否归还了锁，锁是否还在占用</span><br><span class="line">       //  单纯使用锁字段，无法控制有多个线程读到记录是锁没被占用的情况从而都去更新锁为占用</span><br><span class="line">       //  依赖的基础是数据库的更新操作是排他的。</span><br><span class="line">       &lt;update id=&quot;updateLockVersionBy&quot;  &gt;</span><br><span class="line">       update lock</span><br><span class="line">       &lt;set &gt;</span><br><span class="line">               revision = revision+1,</span><br><span class="line">               locked =2</span><br><span class="line">       &lt;/set&gt;</span><br><span class="line">       where id = #&#123;id&#125; and revision=#&#123;version&#125;</span><br><span class="line">   &lt;/update&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>先更具id区查询锁记录，判断锁的状态，也就是记录中的锁字段</li>
+<li>如果锁没被占用，则更具当前的version和id去竞争锁（更新当前锁字段为已占用）</li>
+<li>由于可能存在多个线程读取到锁是为占用的状态，同时去竞争锁，而数据库的update是排他的，我们通过数据库的乐观锁（version），保证竞争锁的时候只用一个线程能够更新成功</li>
+<li>获取锁之后进行业务操作，完成后释放锁</li>
+<li>通过锁标记字段，version字段，利用数据的乐观锁实现分布式锁</li>
+</ol>
+<h3 id="redis实现分布式锁"><a href="#redis实现分布式锁" class="headerlink" title="redis实现分布式锁"></a>redis实现分布式锁</h3><p>redis是单线程的，利用这一特性实现数据的分布式锁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">// lock</span><br><span class="line">	        //获取锁</span><br><span class="line">	        //给指定的key的值增加1如果得到的不是1则说明不是第一次增加</span><br><span class="line">	        //则锁被别的线程拿到</span><br><span class="line">			try &#123;</span><br><span class="line">				seq = jedis.incr(key);</span><br><span class="line">			&#125; catch (Exception ex) &#123;</span><br><span class="line">				logger.error(ex.getMessage(), ex);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			if (seq != 1) &#123;</span><br><span class="line">			/**</span><br><span class="line">			*业务逻辑</span><br><span class="line">			*/</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				try &#123;</span><br><span class="line">				   //设置锁的过期时间避免死锁</span><br><span class="line">					jedis.expire(key, 60);	// key有效期，单位秒</span><br><span class="line">				&#125; catch (Exception ex) &#123;</span><br><span class="line">					logger.error(ex.getMessage(), ex);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		try &#123;</span><br><span class="line">		   /**</span><br><span class="line">			*业务逻辑</span><br><span class="line">			*/</span><br><span class="line">		&#125; finally &#123;</span><br><span class="line">			// unlock</span><br><span class="line">			if (lockFlag &amp;&amp; key != null) &#123;</span><br><span class="line">				try &#123;</span><br><span class="line">			    	//释放锁，删除key</span><br><span class="line">					jedis.del(key);</span><br><span class="line">				&#125; catch (Exception ex) &#123;</span><br><span class="line">					logger.error(ex.getMessage(), ex);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>给指定的key值自动+1，得到的值如果不是1则说明不是第一次增加则说明被别的线程获取到了锁</li>
+<li>业务逻辑结束后删除key，即，释放锁</li>
+<li>给key一个过期时间，避免其他原因死锁</li>
+</ol>
+<h3 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE"></a>NOTE</h3><ul>
+<li>确保线程能够分辨出锁的状态，即 有没有被别的线程获取</li>
+<li>在竞争锁时，确保只有一个线程能够获取锁（依赖于mysql，redis的特性）</li>
+<li>释放锁，业务操作完或者发生异常要释放锁，由于是分布式的锁，并不是代码语义上的锁，要避免其他原因，例如网络抖动，或者redis，mysql挂掉等原因锁释放失败等等情况的死锁–设置一个锁自动释放的机制</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -182,7 +206,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -199,180 +223,126 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <!--<img src="//pan.baidu.com/share/qrcode?url=https://atypeforfun.github.io/2019/06/06/redis和mysql做分布式锁/" alt="微信分享二维码">-->
+      <img src="http://qr.liantu.com/api.php?text=https://atypeforfun.github.io/2019/06/06/redis和mysql做分布式锁/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/26/初夏听雨/" class="archive-article-date">
-  	<time datetime="2019-05-26T11:28:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-26</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/26/初夏听雨/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">初夏听雨</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/26/初夏听雨/">初夏听雨</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/25/Joda-Time转化Jdk的Date绕弯记录/" class="archive-article-date">
-  	<time datetime="2019-05-25T11:28:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/25/Joda-Time转化Jdk的Date绕弯记录/">Joda-Time转化Jdk的Date绕弯记录</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">API</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术/API//" class="article-tag-list-link color4">API</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/17/Java8的时间类/" class="archive-article-date">
-  	<time datetime="2019-03-17T11:28:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/17/Java8的时间类/">Java8的时间类</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JDK8</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">API</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术/JDK//" class="article-tag-list-link color4">JDK</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术/JDK/API//" class="article-tag-list-link color4">API</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
+
+
+<div class="gitalk">
+    <div id="gitalk-container"></div>
+    <script type="text/javascript">
+        const gitalk = new Gitalk({
+            clientID: 'bf23756d4cae28610d0a',
+            clientSecret: '320297b950814346aefe5a3cd406b795321185e4',
+            repo: 'AtypeforFun.github.io',
+            owner: 'AtypeforFun',
+            admin: ['AtypeforFun'],
+	    id: md5(location.pathname),
+           // id: location.pathname,      // Ensure uniqueness and length less than 50
+            distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</div>
+
 
 
           </div>
@@ -395,8 +365,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
